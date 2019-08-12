@@ -235,6 +235,12 @@ Route::middleware(['auth','admin'])->group(function (){
   Route::post('edit/course/{id}','CourseController@updateNameAndTime');
 });
 
+
+Route::prefix('transport')->name('transport.')->group(function (){
+    Route::get('registerroute', 'TransportController@redirectToRegisterRoute');
+    Route::post('registerroute', 'TransportController@storeRoute');
+});
+
 //use PDF;
 Route::middleware(['auth','master.admin'])->group(function (){
   Route::get('edit/user/{id}','UserController@edit');
