@@ -163,7 +163,7 @@
                 )
             );
 
-            $("#rute").trigger('reset');
+            $("#stop-add-form").trigger('reset');
 
         }
 
@@ -172,14 +172,25 @@
         }
 
         function registerRoute() {
-            var stops = [
-                {"name": "Sector 78", "address": "Sector 78 Noida", "time": "7:30 am"},
-                {"name": "Sector 78", "address": "Sector 79 Noida", "time": "7:30 am"}
-            ];
+            var stops = getStopJson();
 
             $("#stopsHiddenField").val(JSON.stringify(stops));
             console.log("Form serialized ", $("#registerRoute").serialize());
             $("#registerRoute").submit();
+        }
+
+        function getStopJson() {
+            // Loop through grabbing everything
+            var myRows = [];
+            var $headers = ["stopName", "stopAddress", "stopTime"];
+            var $rows = $("#route-stop-table tbody tr").each(function(index) {
+                $cells = $(this).find("td");
+                myRows[index] = {};
+                $cells.each(function(cellIndex) {
+                    myRows[index][$headers[cellIndex]] = $(this).html();
+                });
+            });
+            return myRows
         }
     </script>
 

@@ -21,6 +21,7 @@ class CreateRoutesTable extends Migration
             $table->time('startTime');
             $table->time('endTime');
             $table->json("stops");
+            $table->integer('school_id')->unsigned();
             $table->timestamps();
         });
     }
